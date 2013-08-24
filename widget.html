@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-csp>
+    <head>
+        <script src="js/angular.min.js"></script>
+        <script src="js/sprintf.js"></script>
+        <script src="js/widget.js"></script>
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+    </head>
+    <body ng-controller="mainController" ng-switch on="mode">
+        <div ng-switch-when="main">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="align-left">Symbol</th>
+                        <th class="align-right">Price</th>
+                        <th class="align-right">Change</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="quote in quotes">
+                    <td class="symbol">{{ quote.symbol }}</td>
+                    <td class="align-right">{{ sprintf('$%.2f', quote.price) }}</td>
+                    <td class="align-right">{{ quote.changeDirection }}{{ sprintf('%.2f', quote.change) }}</td>
+                </tr>
+            </table>
+            <img id="refresh-button" class="{{ refreshState }}" src="images/refresh.png" alt="Refresh" ng-click="refresh()">
+            <img id="edit-mode-button" src="images/cog.png" alt="Edit" ng-click="setMode('edit')">
+        </div>
+        <div ng-switch-when="edit">
+            <ul>
+                <li ng-repeat="symbol in symbols">{{ symbol }} <img src="images/delete.png" class="delete-button" alt="Remove" ng-click="removeSymbol(symbol)"></li>
+                <li>
+                    <form name="form" ng-submit="addSymbol(newSymbol)" ng-controller="formController">
+                        <input type="text" ng-model="newSymbol" required />
+                        <img src="images/add.png" id="add-button" alt="Add" ng-click="addSymbol(newSymbol)">
+                    </form>
+                </li>
+            </ul>
+            <img id="edit-mode-button" src="images/save.png" alt="Save" ng-click="setMode('main')">
+            <img id="info-button" src="images/info.png" alt="Info" ng-click="setMode('info')">
+        </div>
+        <div ng-switch-when="info">
+            <p>OPEN SOURCE LINK</p>
+            <p>Icons by <a href="http://www.glyphicons.com">GLYPHICONS</a> under the <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> license.</p>
+            <img id="close-info-button" src="images/close.png" alt="Close" ng-click="setMode('edit')">
+        </div>
+    </body>
+</html>

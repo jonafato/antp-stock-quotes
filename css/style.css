@@ -1,0 +1,61 @@
+html {
+    background: white;
+    font-family: "helvetica neue", helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #06B2DD;
+}
+
+table {
+    width: 90%;
+}
+
+td.symbol {
+    text-transform: uppercase;
+}
+
+ul {
+    list-style-type: none;
+    -webkit-padding-start: 0;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+#edit-mode-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#refresh-button, #info-button, #close-info-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#add-button, .delete-button {
+    cursor: pointer;
+}
+
+@-webkit-keyframes rotating {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+#refresh-button.refreshing {
+    -webkit-animation: rotating .5s linear infinite;
+}
